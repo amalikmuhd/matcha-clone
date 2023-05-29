@@ -1,0 +1,35 @@
+.navContainer {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  padding: 0 42px;
+  margin-top: 10px;
+
+  .navItemLeftContainer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+
+    .searchBar {
+      margin-left: 20px;
+      height: 40px;
+      padding: 0 20px;
+      width: 50%;
+      background-color: #e8ecfe;
+      color: #7477b4;
+
+      &::placeholder {
+        color: #7477b4;
+      }
+    }
+  }
+
+  .navItemRightContainer {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+}

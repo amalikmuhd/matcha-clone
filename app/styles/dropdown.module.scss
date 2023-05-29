@@ -1,0 +1,71 @@
+.card {
+  position: absolute;
+  width: 434px;
+  width: 370px;
+  height: 385px;
+  overflow: scroll;
+  z-index: 1;
+  background-color: white;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 8px, rgba(0, 0, 0, 0.03) 0px 1px 2px,
+    rgba(255, 255, 255, 0.6) 0px 4px 9px inset;
+
+  .cardTopDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    .titleStyle {
+      color: rgb(31, 31, 65);
+      font-family: Gilroy, sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 12px;
+    }
+  }
+  .cardMiddleDiv {
+    padding: 10px 20px;
+
+    .titleStyle {
+      color: rgb(31, 31, 65);
+      font-family: Gilroy, sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 12px;
+      margin: 16px 0 26px 0;
+    }
+    .searchDiv {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      border-bottom: 1px solid rgb(232, 236, 253);
+      padding: 5px 0;
+      .inputSearch {
+        width: 100%;
+        // background-color: #e8ecfe;
+        padding-left: 10px;
+      }
+    }
+  }
+  .cardItemDiv {
+    padding: 10px 20px;
+    height: 385px;
+    overflow: scroll;
+    .itemContainer {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      cursor: pointer;
+      .textContainer {
+        display: flex;
+      }
+    }
+  }
+}
