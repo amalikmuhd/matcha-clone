@@ -1,0 +1,186 @@
+.card {
+  width: 434px;
+  width: 370px;
+  height: auto;
+  background-color: white;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 8px, rgba(0, 0, 0, 0.03) 0px 1px 2px,
+    rgba(255, 255, 255, 0.6) 0px 4px 9px inset;
+
+  .cardTopDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid #ecedef;
+
+    .rowDiv {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+
+      .marketButtonStyle {
+        border-bottom: 2px solid rgb(142, 140, 255);
+        color: rgb(31, 31, 65);
+        cursor: pointer;
+        display: flex;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        height: 100%;
+        line-height: 20px;
+        padding: 10px 0;
+      }
+      .limitButtonStyle {
+        color: #7679b5;
+        cursor: not-allowed;
+        display: flex;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        height: 100%;
+        line-height: 20px;
+        padding: 10px 0;
+      }
+    }
+  }
+  .cardMiddleDiv {
+    padding: 10px 20px;
+    .titleStyle {
+      color: rgb(31, 31, 65);
+      font-family: Gilroy, sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 12px;
+      margin: 16px 0 26px 0;
+    }
+    .chooseTokenDiv {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      .chooseTokenBtn {
+        color: rgb(31, 31, 65);
+        font-family: Gilroy, sans-serif;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 24px;
+        // max-width: 160px;
+        // overflow: hidden;
+        text-overflow: ellipsis;
+        user-select: none;
+        // white-space: nowrap;
+      }
+    }
+
+    .dividerDiv {
+      margin-top: 30px;
+      border-bottom: 1px solid rgb(232, 236, 253);
+      height: 17px;
+      position: relative;
+
+      .circleDiv {
+        position: absolute;
+        top: 5px;
+        left: 50%;
+        font-size: 26px;
+        background-color: white;
+        // fill: #e8ecfe;
+        color: #e8ecfe;
+      }
+    }
+
+    .tokenAndInputDiv {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .tokenSelector {
+        flex: 0.4;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .coinStyles {
+          width: 24px;
+          height: 24px;
+        }
+
+        .coinTitle {
+          color: rgb(31, 31, 65);
+          font-family: Gilroy, sans-serif;
+          font-size: 22px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 24px;
+          margin-top: 4px;
+          max-width: 160px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          user-select: none;
+          white-space: nowrap;
+        }
+
+        .coinArrowDown {
+          margin-top: 5px;
+        }
+      }
+      .inputAmountDiv {
+        flex: 0.5;
+        background: rgb(247, 247, 255);
+        border-color: rgb(247, 247, 255);
+        border-radius: 12px;
+        border-style: solid;
+        border-width: 1px;
+        color: rgb(31, 31, 65);
+        cursor: default;
+        font-family: Gilroy, sans-serif;
+        font-size: 22px;
+        font-weight: 600;
+        line-height: 26px;
+        opacity: 1;
+        outline: 0px;
+        padding: 11px 13px 25px 15px;
+        text-align: right;
+        transition: all 0.1s ease-in-out 0s;
+        width: 100%;
+        will-change: border, background, opacity;
+      }
+    }
+
+    .btndiv {
+      width: 100%;
+      color: white;
+      padding: 10px 0 0;
+
+      .connectWalletBtn {
+        border-radius: 30px;
+        background: rgb(112, 110, 255);
+        border-radius: 12px;
+        box-shadow: rgba(0, 0, 0, 0.08) 0px 3px 8px,
+          rgba(0, 0, 0, 0.16) 0px 1px 2px,
+          rgba(255, 255, 255, 0.1) 0px 4px 9px inset;
+        color: rgb(255, 255, 255);
+        cursor: pointer;
+        font-family: Gilroy, sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        height: 60px;
+        line-height: 19px;
+        outline: none;
+        text-align: center;
+        transition: all 0.15s ease-in 0s;
+        width: 100%;
+        will-change: transform, background-color, box-shadow;
+        &:hover {
+          background: rgba(112, 110, 255, 0.817);
+        }
+      }
+    }
+  }
+}

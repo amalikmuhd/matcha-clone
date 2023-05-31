@@ -1,0 +1,121 @@
+.orderBookContainer {
+  background-color: white;
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-between;
+  width: 920px;
+  height: 60vh;
+  gap: 10px;
+  padding: 15px 10px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 8px, rgba(0, 0, 0, 0.03) 0px 1px 2px,
+    rgba(255, 255, 255, 0.6) 0px 4px 9px inset;
+
+  .buyingContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    height: 58vh;
+    overflow: scroll;
+
+    .headerContainer {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      .priceStyle {
+        width: 100px;
+      }
+      .quantityStyle {
+        width: 100px;
+      }
+      .totalStyle {
+        width: 100px;
+      }
+    }
+    .bodyContainer {
+      display: flex;
+      overflow: scroll;
+      justify-content: space-between;
+      // flex-direction: column;
+      .priceBuyStyle {
+        width: 100px;
+        color: #17854c;
+      }
+      .priceSellStyle {
+        width: 100px;
+        color: #d52d1f;
+      }
+      .quantityBuyStyle {
+        width: 100px;
+        // background-color: #17854c;
+        // color: white;
+        // #122A22
+      }
+      .quantitySellStyle {
+        width: 100px;
+      }
+      .totalBuyStyle {
+        width: 100px;
+        // background-color: #17854c;
+        // color: white;
+      }
+      .totalSellStyle {
+        width: 100px;
+      }
+    }
+  }
+  .sellingContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    height: 58vh;
+    overflow: scroll;
+
+    .headerContainer {
+      display: flex;
+      margin-top: 20px;
+      justify-content: space-between;
+      .priceStyle {
+        width: 100px;
+      }
+      .quantityStyle {
+        width: 100px;
+      }
+      .totalStyle {
+        width: 100px;
+      }
+    }
+    .bodyContainer {
+      display: flex;
+      overflow: scroll;
+      justify-content: space-between;
+      // flex-direction: column;
+      .priceBuyStyle {
+        width: 100px;
+        color: #17854c;
+      }
+      .priceSellStyle {
+        width: 100px;
+        color: #d52d1f;
+      }
+      .quantityBuyStyle {
+        width: 100px;
+        // background-color: #17854c;
+        // color: white;
+        // #122A22
+      }
+      .quantitySellStyle {
+        width: 100px;
+      }
+      .totalBuyStyle {
+        width: 100px;
+        // background-color: #17854c;
+        // color: white;
+      }
+      .totalSellStyle {
+        width: 100px;
+      }
+    }
+  }
+}

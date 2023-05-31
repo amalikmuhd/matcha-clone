@@ -4,33 +4,20 @@ import {HiMagnifyingGlass} from 'react-icons/hi2';
 import styles from '../styles/dropdown.module.scss';
 
 const DataList = [
-  {tokenName: 'Dai', tokenFullName: 'DAI'},
-  {tokenName: 'Dai', tokenFullName: 'DAI'},
-  {tokenName: 'Dai', tokenFullName: 'DAI'},
-  {tokenName: 'Dai', tokenFullName: 'DAI'},
-  {tokenName: 'Dai', tokenFullName: 'DAI'},
-  {tokenName: 'Dai', tokenFullName: 'DAI'},
-  {tokenName: 'Dai', tokenFullName: 'DAI'},
-  {tokenName: 'Dai', tokenFullName: 'DAI'},
-  {tokenName: 'Dai', tokenFullName: 'DAI'},
-  {tokenName: 'Dai', tokenFullName: 'DAI'},
-  {tokenName: 'Dai', tokenFullName: 'DAI'},
-  {tokenName: 'Dai', tokenFullName: 'DAI'},
-  {tokenName: 'Dai', tokenFullName: 'DAI'},
-  {tokenName: 'Dai', tokenFullName: 'DAI'},
-  {tokenName: 'Dai', tokenFullName: 'DAI'},
-  {tokenName: 'Dai', tokenFullName: 'DAI'},
-  {tokenName: 'Dai', tokenFullName: 'DAI'},
-  {tokenName: 'Dai', tokenFullName: 'DAI'},
-  {tokenName: 'Dai', tokenFullName: 'DAI'},
+  {tokenName: 'BTC', tokenFullName: 'Bitcoin'},
+  {tokenName: 'BNB', tokenFullName: 'Binance Smart Chain'},
+  // {tokenName: 'USDT', tokenFullName: 'Tether'},
+  {tokenName: 'ETH', tokenFullName: 'Ethereum'},
 ];
 
 interface DropDownProps {
   visible: boolean;
   setVisible: (value: boolean) => void;
+  // data: string;
+  setData: (value: string) => void;
 }
 
-const Dropdown = ({visible, setVisible}: DropDownProps) => {
+const Dropdown = ({visible, setVisible, setData}: DropDownProps) => {
   return (
     <main className={styles.card}>
       <div className={styles.cardTopDiv}>
@@ -58,7 +45,10 @@ const Dropdown = ({visible, setVisible}: DropDownProps) => {
             <div
               className={styles.itemContainer}
               key={index}
-              onClick={() => setVisible(!visible)}
+              onClick={() => {
+                setData(item.tokenName);
+                setVisible(!visible);
+              }}
             >
               <HiMagnifyingGlass />
               <div className={styles.textContainer}>
