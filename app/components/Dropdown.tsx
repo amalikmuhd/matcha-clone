@@ -1,23 +1,31 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {AiOutlineClose} from 'react-icons/ai';
 import {HiMagnifyingGlass} from 'react-icons/hi2';
 import styles from '../styles/dropdown.module.scss';
-
-const DataList = [
-  {tokenName: 'BTC', tokenFullName: 'Bitcoin'},
-  {tokenName: 'BNB', tokenFullName: 'Binance Smart Chain'},
-  // {tokenName: 'USDT', tokenFullName: 'Tether'},
-  {tokenName: 'ETH', tokenFullName: 'Ethereum'},
-];
+import Image from 'next/image';
+// import Image from 'next/image';
 
 interface DropDownProps {
   visible: boolean;
   setVisible: (value: boolean) => void;
-  // data: string;
-  setData: (value: string) => void;
 }
 
-const Dropdown = ({visible, setVisible, setData}: DropDownProps) => {
+const Dropdown = ({visible, setVisible}: DropDownProps) => {
+  const [data, setData] = useState([{symbol: '', logoURI: ''}]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(
+        'https://tokens.coingecko.com/uniswap/all.json',
+      );
+      const tokenLists = await response.json();
+      setData(tokenLists.tokens);
+      // console.log(tokenLists);
+    };
+    fetchData();
+  }, []);
+
+  console.log(data);
   return (
     <main className={styles.card}>
       <div className={styles.cardTopDiv}>
@@ -40,20 +48,26 @@ const Dropdown = ({visible, setVisible, setData}: DropDownProps) => {
         {/* <p className={styles.titleStyle}>You Pay</p> */}
       </div>
       <div className={styles.cardItemDiv}>
-        {DataList.map((item, index) => {
+        {data.map((item, index: React.Key | null | undefined) => {
           return (
             <div
               className={styles.itemContainer}
               key={index}
               onClick={() => {
-                setData(item.tokenName);
+                // setData(item.tokenName);
                 setVisible(!visible);
               }}
             >
-              <HiMagnifyingGlass />
+              <Image
+                unoptimized
+                src={item.logoURI}
+                alt="coin"
+                width={30}
+                height={30}
+              />
               <div className={styles.textContainer}>
-                <p>{item.tokenName} - </p>
-                <p>{item.tokenFullName}</p>
+                {/* <Image src={item.logoURI} alt="coin" /> */}
+                <p>{item.symbol}</p>
               </div>
             </div>
           );

@@ -23,7 +23,7 @@
       gap: 30px;
 
       .marketButtonStyle {
-        border-bottom: 2px solid rgb(142, 140, 255);
+        border-bottom: 2px solid #25272b;
         color: rgb(31, 31, 65);
         cursor: pointer;
         display: flex;
@@ -35,7 +35,7 @@
         padding: 10px 0;
       }
       .limitButtonStyle {
-        color: #7679b5;
+        color: #25272b87;
         cursor: not-allowed;
         display: flex;
         font-size: 16px;
@@ -49,48 +49,112 @@
   }
   .cardMiddleDiv {
     padding: 10px 20px;
-    .titleStyle {
-      color: rgb(31, 31, 65);
-      font-family: Gilroy, sans-serif;
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: 12px;
-      margin: 16px 0 26px 0;
-    }
-    .chooseTokenDiv {
+    .fromTokenSelectContainer {
       display: flex;
-      align-items: center;
-      gap: 16px;
-      .chooseTokenBtn {
-        color: rgb(31, 31, 65);
-        font-family: Gilroy, sans-serif;
-        font-size: 22px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 24px;
-        // max-width: 160px;
-        // overflow: hidden;
-        text-overflow: ellipsis;
-        user-select: none;
-        // white-space: nowrap;
+      flex-direction: column;
+      .fromTokenSelectContainerTop {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0;
+        .titleStyle {
+          color: rgb(31, 31, 65);
+          font-family: Gilroy, sans-serif;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 12px;
+        }
+        .balanceStyle {
+          color: #25272b87;
+          font-family: Gilroy, sans-serif;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 12px;
+        }
+      }
+      .fromTokenSelectContainerMiddle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px 0;
+        .chooseTokenDiv {
+          display: flex;
+          align-items: center;
+          background-color: #f2f3fd;
+          padding: 5px;
+          border-radius: 16px;
+          width: 110px;
+          justify-content: space-between;
+
+          .fromText {
+            color: rgb(31, 31, 65);
+            font-family: Gilroy, sans-serif;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            // line-height: 24px;
+          }
+        }
+
+        .fromTokenSelectContainerMiddleInnerLeftContainer {
+          display: flex;
+          width: 200px;
+          justify-content: flex-end;
+          gap: 4px;
+          .CircleButton {
+            padding: 5px 8px;
+            width: 60px;
+            background-color: #f2f3fd;
+            border-radius: 20px;
+            text-align: center;
+          }
+        }
+      }
+      .fromTokenSelectContainerBottom {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0 0;
+        // height: 40px;
+        align-items: center;
+        .inputStyle {
+          width: 70%;
+          padding-left: 10px;
+          font-size: 32px;
+          &:focus {
+            outline: none;
+          }
+
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+        }
+        .balanceStyle {
+          color: #25272b87;
+          font-family: Gilroy, sans-serif;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 12px;
+        }
       }
     }
 
     .dividerDiv {
-      margin-top: 30px;
+      margin: 10px 0 15px;
       border-bottom: 1px solid rgb(232, 236, 253);
-      height: 17px;
       position: relative;
 
       .circleDiv {
         position: absolute;
-        top: 5px;
-        left: 50%;
+        top: -12px;
+        left: 48%;
         font-size: 26px;
         background-color: white;
-        // fill: #e8ecfe;
-        color: #e8ecfe;
+        fill: #e8ecfe;
+        color: black;
       }
     }
 
@@ -158,9 +222,8 @@
       padding: 10px 0 0;
 
       .connectWalletBtn {
+        background: #25272b;
         border-radius: 30px;
-        background: rgb(112, 110, 255);
-        border-radius: 12px;
         box-shadow: rgba(0, 0, 0, 0.08) 0px 3px 8px,
           rgba(0, 0, 0, 0.16) 0px 1px 2px,
           rgba(255, 255, 255, 0.1) 0px 4px 9px inset;
@@ -170,15 +233,13 @@
         font-size: 16px;
         font-style: normal;
         font-weight: 500;
-        height: 60px;
-        line-height: 19px;
-        outline: none;
+        height: 55px;
         text-align: center;
         transition: all 0.15s ease-in 0s;
         width: 100%;
         will-change: transform, background-color, box-shadow;
         &:hover {
-          background: rgba(112, 110, 255, 0.817);
+          background: #25272bcd;
         }
       }
     }
