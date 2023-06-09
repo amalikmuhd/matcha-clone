@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, {useState, useEffect} from 'react';
 import styles from '../styles/tokenpairselector.module.scss';
 import {BsArrowDownCircle} from 'react-icons/bs';
 import {AiOutlineDown} from 'react-icons/ai';
@@ -6,25 +7,90 @@ import coin from '../assets/icons/eth.webp';
 import Image from 'next/image';
 import {CiSettings} from 'react-icons/ci';
 import Dropdown from './Dropdown';
+import detectEthereumProvider from '@metamask/detect-provider';
 
 const TokenPairSelector = () => {
   const [visible, setVisible] = useState(false);
+  const [hasProvider, setHasProvider] = useState<boolean | null>(null);
+  const initialState = {accounts: [], balance: '', chainId: ''}; /* Updated */
+  const [wallet, setWallet] = useState(initialState);
 
-  const connectWallet = async () => {
-    if (typeof window.ethereum !== 'undefined') {
-      try {
-        console.log('Connecting to Metamask');
-        await window.ethereum.request({method: 'eth_requestAccounts'});
-      } catch (error) {
-        console.log(error);
+  useEffect(() => {
+    const refreshAccounts = (accounts: any) => {
+      if (accounts.length > 0) {
+        updateWallet(accounts);
+      } else {
+        // if length 0, user is disconnected
+        setWallet(initialState);
       }
-    } else {
-      console.log('window is undefined');
-    }
+    };
+
+    const refreshChain = (chainId: any) => {
+      /* New */
+      setWallet((wallet) => ({...wallet, chainId})); /* New */
+    }; /* New */
+
+    const getProvider = async () => {
+      const provider = await detectEthereumProvider({silent: true});
+      setHasProvider(Boolean(provider));
+
+      if (provider) {
+        const accounts = await window.ethereum.request({
+          method: 'eth_accounts',
+        });
+        refreshAccounts(accounts);
+        window.ethereum.on('accountsChanged', refreshAccounts);
+        window.ethereum.on('chainChanged', refreshChain); /* New */
+      }
+    };
+
+    getProvider();
+
+    return () => {
+      window.ethereum?.removeListener('accountsChanged', refreshAccounts);
+      window.ethereum?.removeListener('chainChanged', refreshChain); /* New */
+    };
+  }, []);
+
+  const updateWallet = async (accounts: any) => {
+    const balance = formatBalance(
+      await window.ethereum?.request({
+        method: 'eth_getBalance',
+        params: [accounts[0], 'latest'],
+      }),
+    );
+    const chainId = await window.ethereum!.request({
+      method: 'eth_chainId',
+    });
+    setWallet({accounts, balance, chainId}); /* Updated */
   };
+
+  const handleConnect = async () => {
+    const accounts = await window.ethereum.request({
+      method: 'eth_requestAccounts',
+    });
+    updateWallet(accounts);
+  };
+
+  function formatChainAsNum(chainId: string): React.ReactNode {
+    throw new Error('Function not implemented.');
+  }
 
   return (
     <div className={styles.card}>
+      <div>Malik:</div>
+      {wallet.accounts.length > 0 && (
+        <>
+          {' '}
+          {/* New */}
+          <div>Wallet Accounts: {wallet.accounts[0]}</div>
+          <div>Wallet Balance: {wallet.balance}</div> {/* New */}
+          <div>Hex ChainId: {wallet.chainId}</div> {/* New */}
+          <div>Numeric ChainId: {formatChainAsNum(wallet.chainId)}</div>{' '}
+          <div>Malik:</div>
+          {/* New */}
+        </>
+      )}
       {visible && <Dropdown visible={visible} setVisible={setVisible} />}
       <div className={styles.cardTopDiv}>
         <div className={styles.rowDiv}>
@@ -38,7 +104,9 @@ const TokenPairSelector = () => {
         <div className={styles.fromTokenSelectContainer}>
           <div className={styles.fromTokenSelectContainerTop}>
             <p className={styles.titleStyle}>Pay with</p>
-            <p className={styles.balanceStyle}>Balance: 0.234</p>
+            <p className={styles.balanceStyle}>
+              Balance: {wallet.balance ? wallet.balance : ''}
+            </p>
           </div>
 
           <div className={styles.fromTokenSelectContainerMiddle}>
@@ -101,8 +169,10 @@ const TokenPairSelector = () => {
           </div>
         </div>
         <div className={styles.btndiv}>
-          <button className={styles.connectWalletBtn} onClick={connectWallet}>
-            Connect Wallet
+          <button className={styles.connectWalletBtn} onClick={handleConnect}>
+            {window.ethereum?.isMetaMask && wallet.accounts.length < 1
+              ? 'Connect Wallet'
+              : 'Swap'}
           </button>
         </div>
       </div>
@@ -111,3 +181,6 @@ const TokenPairSelector = () => {
 };
 
 export default TokenPairSelector;
+function formatBalance(arg0: any) {
+  throw new Error('Function not implemented.');
+}

@@ -16,6 +16,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@metamask/detect-provider": "^2.0.0",
     "@next/font": "^13.4.3",
     "@types/node": "20.2.1",
     "@types/react": "18.2.6",
