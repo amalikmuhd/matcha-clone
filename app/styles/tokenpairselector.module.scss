@@ -59,7 +59,7 @@
         .titleStyle {
           color: rgb(31, 31, 65);
           font-family: Gilroy, sans-serif;
-          font-size: 16px;
+          font-size: 14px;
           font-style: normal;
           font-weight: 500;
           line-height: 12px;
@@ -67,7 +67,7 @@
         .balanceStyle {
           color: #25272b87;
           font-family: Gilroy, sans-serif;
-          font-size: 16px;
+          font-size: 13px;
           font-style: normal;
           font-weight: 500;
           line-height: 12px;
@@ -90,10 +90,9 @@
           .fromText {
             color: rgb(31, 31, 65);
             font-family: Gilroy, sans-serif;
-            font-size: 16px;
+            font-size: 14px;
             font-style: normal;
             font-weight: 500;
-            // line-height: 24px;
           }
         }
 
@@ -134,7 +133,7 @@
         .balanceStyle {
           color: #25272b87;
           font-family: Gilroy, sans-serif;
-          font-size: 16px;
+          font-size: 13px;
           font-style: normal;
           font-weight: 500;
           line-height: 12px;
@@ -142,6 +141,100 @@
       }
     }
 
+    .gasFeeContainer {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid rgb(232, 236, 253);
+      padding-top: 10px;
+      margin-top: 10px;
+      .fromTokenSelectContainerTop {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0;
+        .titleStyle {
+          color: rgb(31, 31, 65);
+          font-family: Gilroy, sans-serif;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 12px;
+        }
+        .balanceStyle {
+          color: #25272b87;
+          font-family: Gilroy, sans-serif;
+          font-size: 13px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 12px;
+        }
+      }
+      .fromTokenSelectContainerMiddle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px 0;
+        .chooseTokenDiv {
+          display: flex;
+          align-items: center;
+          background-color: #f2f3fd;
+          padding: 5px;
+          border-radius: 16px;
+          width: 110px;
+          justify-content: space-between;
+
+          .fromText {
+            color: rgb(31, 31, 65);
+            font-family: Gilroy, sans-serif;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+          }
+        }
+
+        .fromTokenSelectContainerMiddleInnerLeftContainer {
+          display: flex;
+          width: 200px;
+          justify-content: flex-end;
+          gap: 4px;
+          .CircleButton {
+            padding: 5px 8px;
+            width: 60px;
+            background-color: #f2f3fd;
+            border-radius: 20px;
+            text-align: center;
+          }
+        }
+      }
+      .fromTokenSelectContainerBottom {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0 0;
+        // height: 40px;
+        align-items: center;
+        .inputStyle {
+          width: 70%;
+          padding-left: 10px;
+          font-size: 32px;
+          &:focus {
+            outline: none;
+          }
+
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+        }
+        .balanceStyle {
+          color: #25272b87;
+          font-family: Gilroy, sans-serif;
+          font-size: 13px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 12px;
+        }
+      }
+    }
     .dividerDiv {
       margin: 10px 0 15px;
       border-bottom: 1px solid rgb(232, 236, 253);

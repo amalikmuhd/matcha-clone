@@ -8,90 +8,121 @@ import Image from 'next/image';
 import {CiSettings} from 'react-icons/ci';
 import Dropdown from './Dropdown';
 import detectEthereumProvider from '@metamask/detect-provider';
+import {useSelector} from 'react-redux';
+import {RootStore} from '../store';
+import {useDispatch} from 'react-redux';
+import MetaMaskSDK from '@metamask/sdk';
+
+export const instantiateSdk = () => {
+  // in case we are rendering on the server,
+  // we don't want to instantiate the SDK when window is not defined
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
+  new MetaMaskSDK();
+};
 
 const TokenPairSelector = () => {
   const [visible, setVisible] = useState(false);
-  const [hasProvider, setHasProvider] = useState<boolean | null>(null);
-  const initialState = {accounts: [], balance: '', chainId: ''}; /* Updated */
-  const [wallet, setWallet] = useState(initialState);
+  const [modalId, setModalId] = useState(0);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    const refreshAccounts = (accounts: any) => {
-      if (accounts.length > 0) {
-        updateWallet(accounts);
-      } else {
-        // if length 0, user is disconnected
-        setWallet(initialState);
-      }
-    };
+  const fromToken = useSelector((state: RootStore) => state.fromTokenSelect);
+  const toToken = useSelector((state: RootStore) => state.toTokenSelect);
+  const [data, setData] = useState(false);
+  console.log(fromToken, 'from');
+  console.log(toToken, 'to');
+  // const [hasProvider, setHasProvider] = useState<boolean | null>(null);
+  // const initialState = {accounts: [], balance: '', chainId: ''}; /* Updated */
+  // const [wallet, setWallet] = useState(initialState);
 
-    const refreshChain = (chainId: any) => {
-      /* New */
-      setWallet((wallet) => ({...wallet, chainId})); /* New */
-    }; /* New */
+  // const MMSDK = new MetaMaskSDK(Option);
 
-    const getProvider = async () => {
-      const provider = await detectEthereumProvider({silent: true});
-      setHasProvider(Boolean(provider));
+  // const ethereum = MMSDK.getProvider(); // You can also access via window.ethereum
 
-      if (provider) {
-        const accounts = await window.ethereum.request({
-          method: 'eth_accounts',
-        });
-        refreshAccounts(accounts);
-        window.ethereum.on('accountsChanged', refreshAccounts);
-        window.ethereum.on('chainChanged', refreshChain); /* New */
-      }
-    };
+  // useEffect(() => {
+  //   window.ethereum.request({method: 'eth_requestAccounts', params: []});
+  // }, []);
 
-    getProvider();
+  // useEffect(() => {
+  //   const refreshAccounts = (accounts: any) => {
+  //     if (accounts.length > 0) {
+  //       updateWallet(accounts);
+  //     } else {
+  //       // if length 0, user is disconnected
+  //       setWallet(initialState);
+  //     }
+  //   };
 
-    return () => {
-      window.ethereum?.removeListener('accountsChanged', refreshAccounts);
-      window.ethereum?.removeListener('chainChanged', refreshChain); /* New */
-    };
-  }, []);
+  //   const refreshChain = (chainId: any) => {
+  //     /* New */
+  //     setWallet((wallet) => ({...wallet, chainId})); /* New */
+  //   }; /* New */
 
-  const updateWallet = async (accounts: any) => {
-    const balance = formatBalance(
-      await window.ethereum?.request({
-        method: 'eth_getBalance',
-        params: [accounts[0], 'latest'],
-      }),
-    );
-    const chainId = await window.ethereum!.request({
-      method: 'eth_chainId',
-    });
-    setWallet({accounts, balance, chainId}); /* Updated */
-  };
+  //   const getProvider = async () => {
+  //     const provider = await detectEthereumProvider({silent: true});
+  //     setHasProvider(Boolean(provider));
 
-  const handleConnect = async () => {
-    const accounts = await window.ethereum.request({
-      method: 'eth_requestAccounts',
-    });
-    updateWallet(accounts);
-  };
+  //     if (provider) {
+  //       const accounts = await window.ethereum.request({
+  //         method: 'eth_accounts',
+  //       });
+  //       refreshAccounts(accounts);
+  //       window.ethereum.on('accountsChanged', refreshAccounts);
+  //       window.ethereum.on('chainChanged', refreshChain); /* New */
+  //     }
+  //   };
 
-  function formatChainAsNum(chainId: string): React.ReactNode {
-    throw new Error('Function not implemented.');
-  }
+  //   getProvider();
+
+  //   return () => {
+  //     window.ethereum?.removeListener('accountsChanged', refreshAccounts);
+  //     window.ethereum?.removeListener('chainChanged', refreshChain); /* New */
+  //   };
+  // }, []);
+
+  // const updateWallet = async (accounts: any) => {
+  //   const balance = formatBalance(
+  //     await window.ethereum?.request({
+  //       method: 'eth_getBalance',
+  //       params: [accounts[0], 'latest'],
+  //     }),
+  //   );
+  //   const chainId = await window.ethereum!.request({
+  //     method: 'eth_chainId',
+  //   });
+  //   setWallet({accounts, balance, chainId}); /* Updated */
+  // };
+
+  // const handleConnect = async () => {
+  //   const accounts = await window.ethereum.request({
+  //     method: 'eth_requestAccounts',
+  //   });
+  //   updateWallet(accounts);
+  // };
+
+  // function formatChainAsNum(chainId: string): React.ReactNode {
+  //   throw new Error('Function not implemented.');
+  // }
 
   return (
     <div className={styles.card}>
-      <div>Malik:</div>
+      {/* <div>Malik:</div>
+      <div>Wallet Accounts: {wallet.accounts[0]}</div>
       {wallet.accounts.length > 0 && (
         <>
-          {' '}
-          {/* New */}
           <div>Wallet Accounts: {wallet.accounts[0]}</div>
           <div>Wallet Balance: {wallet.balance}</div> {/* New */}
-          <div>Hex ChainId: {wallet.chainId}</div> {/* New */}
-          <div>Numeric ChainId: {formatChainAsNum(wallet.chainId)}</div>{' '}
-          <div>Malik:</div>
-          {/* New */}
-        </>
+      {/* <div>Hex ChainId: {wallet.chainId}</div> New */}
+      {/* <div>Numeric ChainId: {formatChainAsNum(wallet.chainId)}</div>{' '} */}
+      {/* <div>Malik:</div> */}
+      {/* </> */}
+      {/* )} */}
+
+      {visible && (
+        <Dropdown visible={visible} setVisible={setVisible} modalId={modalId} />
       )}
-      {visible && <Dropdown visible={visible} setVisible={setVisible} />}
       <div className={styles.cardTopDiv}>
         <div className={styles.rowDiv}>
           <button className={styles.marketButtonStyle}>Market</button>
@@ -105,17 +136,29 @@ const TokenPairSelector = () => {
           <div className={styles.fromTokenSelectContainerTop}>
             <p className={styles.titleStyle}>Pay with</p>
             <p className={styles.balanceStyle}>
-              Balance: {wallet.balance ? wallet.balance : ''}
+              Balance:
+              {/* {wallet.balance ? wallet.balance : ''} */}
             </p>
           </div>
 
           <div className={styles.fromTokenSelectContainerMiddle}>
             <div
               className={styles.chooseTokenDiv}
-              onClick={() => setVisible(!visible)}
+              onClick={() => {
+                setModalId(0);
+                setVisible(!visible);
+              }}
             >
-              <Image src={coin} alt="coin" style={{width: 25, height: 25}} />
-              <p className={styles.fromText}>USDT</p>
+              <Image
+                unoptimized
+                src={fromToken.tokenData.logoURI}
+                alt="coin"
+                width={25}
+                height={25}
+              />
+              <p className={styles.fromText}>
+                {fromToken.tokenData.symbol ?? 'Choose Token'}
+              </p>
               <AiOutlineDown size={12} style={{marginRight: 5}} />
             </div>
             <div
@@ -142,19 +185,33 @@ const TokenPairSelector = () => {
             <BsArrowDownCircle className={styles.circleDiv} color="black" />
           </div>
         </div>
+
+        {/*  */}
+
         <div className={styles.fromTokenSelectContainer}>
           <div className={styles.fromTokenSelectContainerTop}>
             <p className={styles.titleStyle}>You recieve</p>
-            <p className={styles.balanceStyle}>Balance: 0.234</p>
+            <p className={styles.balanceStyle}>Balance:</p>
           </div>
 
           <div className={styles.fromTokenSelectContainerMiddle}>
             <div
               className={styles.chooseTokenDiv}
-              onClick={() => setVisible(!visible)}
+              onClick={() => {
+                setModalId(1);
+                setVisible(!visible);
+              }}
             >
-              <Image src={coin} alt="coin" style={{width: 25, height: 25}} />
-              <p className={styles.FromText}>USDT</p>
+              <Image
+                unoptimized
+                src={toToken.tokenData.logoURI}
+                alt="coin"
+                width={25}
+                height={25}
+              />
+              <p className={styles.FromText}>
+                {toToken.tokenData.symbol ?? 'Choose Token'}
+              </p>
               <AiOutlineDown size={12} style={{marginRight: 5}} />
             </div>
           </div>
@@ -168,11 +225,30 @@ const TokenPairSelector = () => {
             <p className={styles.balanceStyle}>0.34345</p>
           </div>
         </div>
+
+        {data && (
+          <div className={styles.gasFeeContainer}>
+            <div className={styles.fromTokenSelectContainerTop}>
+              <p className={styles.titleStyle}>Transaction type:</p>
+              <p className={styles.balanceStyle}>Standard</p>
+            </div>
+
+            <div className={styles.fromTokenSelectContainerTop}>
+              <p className={styles.titleStyle}>Gas fee:</p>
+              <p className={styles.balanceStyle}>0.00</p>
+            </div>
+          </div>
+        )}
+
         <div className={styles.btndiv}>
-          <button className={styles.connectWalletBtn} onClick={handleConnect}>
-            {window.ethereum?.isMetaMask && wallet.accounts.length < 1
+          <button
+            className={styles.connectWalletBtn}
+            // onClick={handleConnect}
+          >
+            {/* {window.ethereum?.isMetaMask && wallet.accounts.length < 1
               ? 'Connect Wallet'
-              : 'Swap'}
+              : 'Swap'} */}
+            Connect Wallet
           </button>
         </div>
       </div>
