@@ -31,8 +31,6 @@ const TokenPairSelector = () => {
   const fromToken = useSelector((state: RootStore) => state.fromTokenSelect);
   const toToken = useSelector((state: RootStore) => state.toTokenSelect);
   const [showGasFee, setShowGasFee] = useState(false);
-  // console.log(fromToken, 'from');
-  // console.log(toToken, 'to');
 
   // const ShowBalance = () => {
   //   if (isLoading) return 'Fetching balance';
